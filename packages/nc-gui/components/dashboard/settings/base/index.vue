@@ -39,15 +39,11 @@ onMounted(() => {
     <!-- Left Pane -->
     <div class="flex flex-col">
       <div class="h-full flex flex-col gap-1 w-60">
-        <div
-          v-if="isEeUI && hasPermissionForSnapshots"
-          data-testid="snapshots-tab"
-          :class="{
-            'active-menu': activeMenu === 'snapshots',
-          }"
+        <div v-if="isEeUI && hasPermissionForSnapshots" data-testid="snapshots-tab" :class="{
+          'active-menu': activeMenu === 'snapshots',
+        }"
           class="gap-3 hover:bg-gray-100 transition-all text-nc-content-gray flex rounded-lg items-center cursor-pointer py-1.5 px-3"
-          @click="selectMenu('snapshots')"
-        >
+          @click="selectMenu('snapshots')">
           <GeneralIcon icon="camera" />
 
           <span>
@@ -55,46 +51,34 @@ onMounted(() => {
           </span>
         </div>
 
-        <div
-          v-if="isUIAllowed('baseMiscSettings')"
-          :class="{
-            'active-menu': activeMenu === 'visibility',
-          }"
+        <div v-if="isUIAllowed('baseMiscSettings')" :class="{
+          'active-menu': activeMenu === 'visibility',
+        }"
           class="gap-3 hover:bg-gray-100 transition-all text-nc-content-gray flex rounded-lg items-center cursor-pointer py-1.5 px-3"
-          data-testid="visibility-tab"
-          @click="selectMenu('visibility')"
-        >
+          data-testid="visibility-tab" @click="selectMenu('visibility')">
           <GeneralIcon icon="ncEye" />
           <span>
             {{ $t('labels.visibilityAndDataHandling') }}
           </span>
         </div>
-        <div
-          v-if="isMCPEnabled"
-          :class="{
-            'active-menu': activeMenu === 'mcp',
-          }"
+        <div v-if="isMCPEnabled" :class="{
+          'active-menu': activeMenu === 'mcp',
+        }"
           class="gap-3 hover:bg-gray-100 transition-all text-nc-content-gray flex rounded-lg items-center cursor-pointer py-1.5 px-3"
-          data-testid="mcp-tab"
-          @click="selectMenu('mcp')"
-        >
+          data-testid="mcp-tab" @click="selectMenu('mcp')">
           <GeneralIcon icon="mcp" />
           <span>
             {{ $t('labels.modelContextProtocol') }}
           </span>
         </div>
 
-        <div
-          v-if="!isEeUI && hasPermissionForMigrate"
-          :class="{
-            'active-menu': activeMenu === 'migrate',
-          }"
+        <div v-if="!isEeUI && hasPermissionForMigrate" :class="{
+          'active-menu': activeMenu === 'migrate',
+        }"
           class="gap-3 hover:bg-gray-100 transition-all text-nc-content-gray flex rounded-lg items-center cursor-pointer py-1.5 px-3"
-          data-testid="migrate-tab"
-          @click="selectMenu('migrate')"
-        >
+          data-testid="migrate-tab" @click="selectMenu('migrate')">
           <GeneralIcon icon="move" />
-          <span> Migrate </span>
+          <span> 迁移 </span>
         </div>
       </div>
     </div>

@@ -71,25 +71,16 @@ const accountUrl = computed(() => {
 </script>
 
 <template>
-  <div
-    class="flex w-full flex-col border-gray-200 gap-y-1"
-    :class="{
-      'sticky bottom-0 bg-[var(--mini-sidebar-bg-color)]': isMiniSidebar,
-    }"
-  >
+  <div class="flex w-full flex-col border-gray-200 gap-y-1" :class="{
+    'sticky bottom-0 bg-[var(--mini-sidebar-bg-color)]': isMiniSidebar,
+  }">
     <LazyGeneralMaintenanceAlert v-if="!isMiniSidebar" />
-    <div
-      class="flex items-center"
-      :class="{
-        'justify-center h-[var(--mini-sidebar-width)]': isMiniSidebar,
-        'justify-between': !isMiniSidebar,
-      }"
-    >
-      <NcDropdown
-        v-model:visible="isMenuOpen"
-        placement="topLeft"
-        :overlay-class-name="`!min-w-64 ${isMiniSidebar ? '!left-1' : ''}`"
-      >
+    <div class="flex items-center" :class="{
+      'justify-center h-[var(--mini-sidebar-width)]': isMiniSidebar,
+      'justify-between': !isMiniSidebar,
+    }">
+      <NcDropdown v-model:visible="isMenuOpen" placement="topLeft"
+        :overlay-class-name="`!min-w-64 ${isMiniSidebar ? '!left-1' : ''}`">
         <NcTooltip :disabled="!isMiniSidebar" placement="right" hide-on-click :arrow="false">
           <template #title>
             <div>
@@ -99,22 +90,16 @@ const accountUrl = computed(() => {
               </div>
             </div>
           </template>
-          <div
-            class="flex"
-            :class="{
-              'flex-row py-1 px-3 gap-x-2 items-center text-gray-700 hover:bg-gray-200 rounded-lg cursor-pointer': !isMiniSidebar,
-              'nc-mini-sidebar-ws-item !w-[var(--mini-sidebar-width)] flex-none': isMiniSidebar,
-            }"
-            data-testid="nc-sidebar-userinfo"
-          >
-            <div
-              v-if="isMiniSidebar"
+          <div class="flex" :class="{
+            'flex-row py-1 px-3 gap-x-2 items-center text-gray-700 hover:bg-gray-200 rounded-lg cursor-pointer': !isMiniSidebar,
+            'nc-mini-sidebar-ws-item !w-[var(--mini-sidebar-width)] flex-none': isMiniSidebar,
+          }" data-testid="nc-sidebar-userinfo">
+            <div v-if="isMiniSidebar"
               class="nc-user-icon-wrapper border-1 w-7 h-7 flex-none rounded-full overflow-hidden transition-all duration-300"
               :class="{
                 'border-nc-gray-medium': !isMenuOpen,
                 'active border-primary shadow-selected': isMenuOpen,
-              }"
-            >
+              }">
               <GeneralUserIcon :user="user" size="medium" class="!w-full !h-full !min-w-full cursor-pointer" />
             </div>
 
@@ -143,38 +128,22 @@ const accountUrl = computed(() => {
               </div>
             </NcMenuItem>
             <NcDivider />
-            <a
-              v-e="['c:nocodb:discord']"
-              href="https://discord.gg/5RgZmkW"
-              target="_blank"
-              class="!underline-transparent"
-              rel="noopener noreferrer"
-            >
+            <a v-e="['c:nocodb:discord']" href="https://discord.gg/5RgZmkW" target="_blank"
+              class="!underline-transparent" rel="noopener noreferrer">
               <NcMenuItem class="social-icon-wrapper">
                 <GeneralIcon class="social-icon" icon="ncDiscord" />
                 <span class="menu-btn"> {{ $t('labels.community.joinDiscord') }} </span>
               </NcMenuItem>
             </a>
-            <a
-              v-e="['c:nocodb:reddit']"
-              href="https://www.reddit.com/r/NocoDB"
-              target="_blank"
-              class="!underline-transparent"
-              rel="noopener noreferrer"
-            >
+            <a v-e="['c:nocodb:reddit']" href="https://www.reddit.com/r/NocoDB" target="_blank"
+              class="!underline-transparent" rel="noopener noreferrer">
               <NcMenuItem class="social-icon-wrapper">
                 <GeneralIcon class="social-icon" icon="ncReddit" />
                 <span class="menu-btn"> {{ $t('labels.community.joinReddit') }} </span>
               </NcMenuItem>
             </a>
-            <a
-              v-if="!isMiniSidebar"
-              v-e="['c:nocodb:twitter']"
-              href="https://twitter.com/nocodb"
-              target="_blank"
-              class="!underline-transparent"
-              rel="noopener noreferrer"
-            >
+            <a v-if="!isMiniSidebar" v-e="['c:nocodb:twitter']" href="https://twitter.com/nocodb" target="_blank"
+              class="!underline-transparent" rel="noopener noreferrer">
               <NcMenuItem class="social-icon-wrapper group">
                 <GeneralIcon class="social-icon text-gray-500 group-hover:text-gray-800" icon="ncTwitter" />
                 <span class="menu-btn"> {{ $t('labels.twitter') }} </span>
@@ -182,22 +151,18 @@ const accountUrl = computed(() => {
             </a>
             <template v-if="!appInfo.ee || isFeatureEnabled(FEATURE_FLAG.LANGUAGE) || appInfo.isOnPrem">
               <NcDivider />
-              <a-popover
-                key="language"
-                class="lang-menu !py-1.5"
-                placement="rightBottom"
-                overlay-class-name="nc-lang-menu-overlay"
-              >
+              <a-popover key="language" class="lang-menu !py-1.5" placement="rightBottom"
+                overlay-class-name="nc-lang-menu-overlay">
                 <NcMenuItem>
                   <div v-e="['c:translate:open']" class="flex gap-2 items-center">
                     <GeneralIcon icon="translate" class="group-hover:text-black nc-language ml-0.25 menu-icon" />
                     {{ $t('labels.language') }}
-                    <div class="flex items-center text-gray-400 text-xs">{{ $t('labels.community.communityTranslated') }}</div>
+                    <div class="flex items-center text-gray-400 text-xs">{{ $t('labels.community.communityTranslated')
+                    }}</div>
                     <div class="flex-1" />
 
                     <MaterialSymbolsChevronRightRounded
-                      class="transform group-hover:(scale-115 text-accent) text-xl text-gray-400"
-                    />
+                      class="transform group-hover:(scale-115 text-accent) text-xl text-gray-400" />
                   </div>
                 </NcMenuItem>
 
@@ -213,26 +178,16 @@ const accountUrl = computed(() => {
               <NcDivider />
 
               <template v-if="!isMiniSidebar">
-                <a
-                  v-e="['c:nocodb:forum-open']"
-                  href="https://community.nocodb.com"
-                  target="_blank"
-                  class="!underline-transparent"
-                  rel="noopener"
-                >
+                <a v-e="['c:nocodb:forum-open']" href="https://community.nocodb.com" target="_blank"
+                  class="!underline-transparent" rel="noopener">
                   <NcMenuItem>
                     <GeneralIcon icon="ncHelp" class="menu-icon mt-0.5" />
                     <span class="menu-btn"> {{ $t('title.forum') }} </span>
                   </NcMenuItem>
                 </a>
 
-                <a
-                  v-e="['c:nocodb:docs-open']"
-                  href="https://docs.nocodb.com"
-                  target="_blank"
-                  class="!underline-transparent"
-                  rel="noopener"
-                >
+                <a v-e="['c:nocodb:docs-open']" href="https://docs.nocodb.com" target="_blank"
+                  class="!underline-transparent" rel="noopener">
                   <NcMenuItem>
                     <GeneralIcon icon="file" class="menu-icon mt-0.5" />
                     <span class="menu-btn"> {{ $t('title.docs') }} </span>
@@ -247,8 +202,11 @@ const accountUrl = computed(() => {
                 <GeneralIcon icon="bulb" class="menu-icon mt-0.5" />
                 <span class="menu-btn"> {{ $t('general.featurePreview') }} </span>
               </NcMenuItem>
-              <nuxt-link v-e="['c:user:settings']" class="!no-underline" :to="accountUrl" @click="auditsStore.handleReset">
-                <NcMenuItem> <GeneralIcon icon="ncSettings" class="menu-icon" /> {{ $t('title.accountSettings') }} </NcMenuItem>
+              <nuxt-link v-e="['c:user:settings']" class="!no-underline" :to="accountUrl"
+                @click="auditsStore.handleReset">
+                <NcMenuItem>
+                  <GeneralIcon icon="ncSettings" class="menu-icon" /> {{ $t('title.accountSettings') }}
+                </NcMenuItem>
               </nuxt-link>
             </template>
           </NcMenu>
@@ -260,9 +218,9 @@ const accountUrl = computed(() => {
 
     <template v-if="!isMiniSidebar">
       <template v-if="isMobileMode || appInfo.ee"></template>
-      <div v-else class="flex flex-row w-full justify-between pt-0.5 truncate">
+      <!-- <div v-else class="flex flex-row w-full justify-between pt-0.5 truncate">
         <GeneralJoinCloud />
-      </div>
+      </div> -->
     </template>
   </div>
 </template>
@@ -271,6 +229,7 @@ const accountUrl = computed(() => {
 .menu-btn {
   line-height: 1.5;
 }
+
 .menu-icon {
   @apply w-4 h-4;
   font-size: 1rem;
@@ -280,6 +239,7 @@ const accountUrl = computed(() => {
   &:not(.active):hover {
     box-shadow: 0px 12px 16px -4px rgba(0, 0, 0, 0.1), 0px 4px 6px -2px rgba(0, 0, 0, 0.06);
   }
+
   :deep(img) {
     @apply !cursor-pointer;
   }

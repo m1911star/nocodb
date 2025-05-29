@@ -241,8 +241,8 @@ const openBaseHomePage = async () => {
     })}`,
     cmdOrCtrl
       ? {
-          open: navigateToBlankTargetOpenOption,
-        }
+        open: navigateToBlankTargetOpenOption,
+      }
       : undefined,
   )
 }
@@ -253,16 +253,10 @@ const openBaseHomePage = async () => {
     <div>
       <DashboardSidebarHeaderWrapper>
         <div v-if="isSharedBase" class="flex-1">
-          <div
-            data-testid="nc-workspace-menu"
-            class="flex items-center nc-workspace-menu overflow-hidden py-1.25 pr-0.25 justify-center w-full"
-          >
-            <a
-              class="w-24 min-w-10 transition-all duration-200 p-1 transform"
-              href="https://github.com/nocodb/nocodb"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+          <div data-testid="nc-workspace-menu"
+            class="flex items-center nc-workspace-menu overflow-hidden py-1.25 pr-0.25 justify-center w-full">
+            <a class="w-24 min-w-10 transition-all duration-200 p-1 transform" href="https://github.com/nocodb/nocodb"
+              target="_blank" rel="noopener noreferrer">
               <img alt="NocoDB" src="~/assets/img/brand/nocodb.png" />
             </a>
 
@@ -272,20 +266,15 @@ const openBaseHomePage = async () => {
         <DashboardTreeViewProjectNode v-else ref="projectNodeRef" is-project-header />
       </DashboardSidebarHeaderWrapper>
 
-      <DashboardTreeViewProjectHomeSearchInput :placeholder="`Search table, view${showCreateNewAsDropdown ? ', script' : ''}`" />
+      <DashboardTreeViewProjectHomeSearchInput
+        :placeholder="`Search table, view${showCreateNewAsDropdown ? ', script' : ''}`" />
 
       <div class="nc-project-home-section pt-1 !pb-2 xs:hidden flex flex-col gap-2">
-        <div
-          v-if="isUIAllowed('tableCreate', { roles: base.project_role, source: base?.sources?.[0] })"
-          class="flex items-center w-full"
-        >
-          <NcButton
-            type="text"
-            size="small"
-            full-width
+        <div v-if="isUIAllowed('tableCreate', { roles: base.project_role, source: base?.sources?.[0] })"
+          class="flex items-center w-full">
+          <NcButton type="text" size="small" full-width
             class="nc-home-create-new-btn !text-brand-500 !hover:(text-brand-600) !xs:hidden w-full !px-3"
-            @click="addNewProjectChildEntity"
-          >
+            @click="addNewProjectChildEntity">
             <div class="flex items-center gap-2">
               <GeneralIcon icon="ncPlusCircleSolid" />
 
@@ -297,26 +286,16 @@ const openBaseHomePage = async () => {
             </div>
           </NcButton>
         </div>
-        <NcButton
-          v-e="['c:base:home']"
-          type="text"
-          size="xsmall"
-          class="nc-sidebar-top-button !h-8 w-full !pl-0"
-          :centered="false"
-          :class="{
+        <NcButton v-e="['c:base:home']" type="text" size="xsmall" class="nc-sidebar-top-button !h-8 w-full !pl-0"
+          :centered="false" :class="{
             '!text-brand-600 !bg-brand-50 !hover:bg-brand-50': activeProjectId === base.id && baseViewOpen,
             '!hover:(bg-gray-200 text-gray-700)': !(activeProjectId === base.id && baseViewOpen),
-          }"
-          @click="openBaseHomePage"
-        >
-          <div
-            class="flex items-center gap-2 pl-3 pr-1"
-            :class="{
-              'font-semibold': activeProjectId === base.id && baseViewOpen,
-            }"
-          >
+          }" @click="openBaseHomePage">
+          <div class="flex items-center gap-2 pl-3 pr-1" :class="{
+            'font-semibold': activeProjectId === base.id && baseViewOpen,
+          }">
             <GeneralIcon icon="home1" class="!h-4 w-4" />
-            <div>Overview</div>
+            <div>概览</div>
           </div>
         </NcButton>
       </div>
@@ -327,11 +306,9 @@ const openBaseHomePage = async () => {
         <div class="nc-project-home-section-header !cursor-pointer" @click.stop="isExpanded = !isExpanded">
           <div class="flex-1">Tables</div>
 
-          <GeneralIcon
-            icon="chevronRight"
+          <GeneralIcon icon="chevronRight"
             class="flex-none nc-sidebar-source-node-btns cursor-pointer transform transition-transform duration-200 text-[20px] text-nc-content-gray-muted"
-            :class="{ '!rotate-90': isExpanded }"
-          />
+            :class="{ '!rotate-90': isExpanded }" />
         </div>
         <div key="g1" class="overflow-x-hidden transition-max-height" :class="{ 'max-h-0': !isExpanded }">
           <template v-if="base && base?.sources">
@@ -346,143 +323,87 @@ const openBaseHomePage = async () => {
                 <div class="border-none sortable-list">
                   <div v-for="(source, sourceIndex) of base.sources" :key="`source-${source.id}`">
                     <template v-if="sourceIndex === 0"></template>
-                    <a-collapse
-                      v-else-if="source && source.enabled"
-                      v-model:activeKey="activeKey"
-                      v-e="['c:source:toggle-expand']"
-                      class="!mx-0 !px-0 nc-sidebar-source-node"
-                      :class="[{ hidden: searchActive && !!filterQuery }]"
-                      expand-icon-position="right"
-                      :bordered="false"
-                      ghost
-                    >
+                    <a-collapse v-else-if="source && source.enabled" v-model:activeKey="activeKey"
+                      v-e="['c:source:toggle-expand']" class="!mx-0 !px-0 nc-sidebar-source-node"
+                      :class="[{ hidden: searchActive && !!filterQuery }]" expand-icon-position="right"
+                      :bordered="false" ghost>
                       <template #expandIcon="{ isActive, header }">
-                        <NcButton
-                          v-if="
-                            !(
-                              header?.[0]?.props?.['data-sourceId'] &&
-                              sourceRenameHelpers[header?.[0]?.props?.['data-sourceId']]?.editMode
-                            )
-                          "
-                          v-e="['c:external:base:expand']"
-                          type="text"
-                          size="xxsmall"
+                        <NcButton v-if="
+                          !(
+                            header?.[0]?.props?.['data-sourceId'] &&
+                            sourceRenameHelpers[header?.[0]?.props?.['data-sourceId']]?.editMode
+                          )
+                        " v-e="['c:external:base:expand']" type="text" size="xxsmall"
                           class="nc-sidebar-node-btn nc-sidebar-expand !xs:opacity-100 !mr-0 mt-0.5"
-                          :class="{ '!opacity-100 !inline-block': isBasesOptionsOpen[source!.id!] }"
-                        >
-                          <GeneralIcon
-                            icon="chevronDown"
+                          :class="{ '!opacity-100 !inline-block': isBasesOptionsOpen[source!.id!] }">
+                          <GeneralIcon icon="chevronDown"
                             class="flex-none cursor-pointer transform transition-transform duration-500 rotate-270"
-                            :class="{ '!rotate-360': isActive }"
-                          />
+                            :class="{ '!rotate-360': isActive }" />
                         </NcButton>
                       </template>
                       <a-collapse-panel :key="`collapse-${source.id}`">
                         <template #header>
-                          <div
-                            :data-sourceId="source.id"
-                            class="nc-sidebar-node min-w-20 w-full h-full flex flex-row group py-0.5 !mr-0"
-                            :class="{
+                          <div :data-sourceId="source.id"
+                            class="nc-sidebar-node min-w-20 w-full h-full flex flex-row group py-0.5 !mr-0" :class="{
                               'pr-0.5': source.id && sourceRenameHelpers[source.id]?.editMode,
                               'pr-6.5': !(source.id && sourceRenameHelpers[source.id]?.editMode),
-                            }"
-                          >
-                            <div
-                              v-if="sourceIndex === 0"
+                            }">
+                            <div v-if="sourceIndex === 0"
                               class="source-context flex items-center gap-2 text-gray-800 nc-sidebar-node-title"
-                              @contextmenu="setMenuContext('source', source)"
-                            >
+                              @contextmenu="setMenuContext('source', source)">
                               <GeneralBaseLogo class="flex-none min-w-4 !xs:(min-w-4.25 w-4.25 text-sm)" />
                               {{ $t('general.default') }}
                             </div>
-                            <div
-                              v-else
+                            <div v-else
                               class="source-context flex flex-grow items-center gap-1 text-gray-800 min-w-1/20 max-w-full"
-                              @contextmenu="setMenuContext('source', source)"
-                            >
-                              <NcTooltip
-                                :tooltip-style="{ 'min-width': 'max-content' }"
-                                :overlay-inner-style="{ 'min-width': 'max-content' }"
-                                :mouse-leave-delay="0.3"
-                                placement="topLeft"
-                                trigger="hover"
-                                class="flex items-center"
-                              >
+                              @contextmenu="setMenuContext('source', source)">
+                              <NcTooltip :tooltip-style="{ 'min-width': 'max-content' }"
+                                :overlay-inner-style="{ 'min-width': 'max-content' }" :mouse-leave-delay="0.3"
+                                placement="topLeft" trigger="hover" class="flex items-center">
                                 <template #title>
                                   <component :is="getSourceTooltip(source)" />
                                 </template>
                                 <div class="flex-none w-6 flex items-center justify-center">
-                                  <GeneralBaseLogo
-                                    :color="getSourceIconColor(source)"
-                                    class="flex-none min-w-4 !xs:(min-w-4.25 w-4.25 text-sm)"
-                                  />
+                                  <GeneralBaseLogo :color="getSourceIconColor(source)"
+                                    class="flex-none min-w-4 !xs:(min-w-4.25 w-4.25 text-sm)" />
                                 </div>
                               </NcTooltip>
-                              <a-input
-                                v-if="source.id && sourceRenameHelpers[source.id]?.editMode"
-                                ref="input"
+                              <a-input v-if="source.id && sourceRenameHelpers[source.id]?.editMode" ref="input"
                                 v-model:value="sourceRenameHelpers[source.id].tempTitle"
                                 class="capitalize !bg-transparent flex-1 mr-4 !pr-1.5 !text-gray-700 !rounded-md !h-6 animate-sidebar-node-input-padding"
                                 :style="{
                                   fontWeight: 'inherit',
-                                }"
-                                :data-source-rename-input-id="source.id"
-                                @click.stop
-                                @keydown.enter.stop.prevent
-                                @keyup.enter="updateSourceTitle(source.id!)"
-                                @keyup.esc="updateSourceTitle(source.id!)"
-                                @blur="updateSourceTitle(source.id!)"
-                                @keydown.stop
-                              />
-                              <NcTooltip
-                                v-else
+                                }" :data-source-rename-input-id="source.id" @click.stop @keydown.enter.stop.prevent
+                                @keyup.enter="updateSourceTitle(source.id!)" @keyup.esc="updateSourceTitle(source.id!)"
+                                @blur="updateSourceTitle(source.id!)" @keydown.stop />
+                              <NcTooltip v-else
                                 class="nc-sidebar-node-title capitalize text-ellipsis overflow-hidden select-none text-gray-700"
                                 :style="{ wordBreak: 'keep-all', whiteSpace: 'nowrap', display: 'inline' }"
-                                show-on-truncate-only
-                              >
+                                show-on-truncate-only>
                                 <template #title> {{ source.alias || '' }}</template>
-                                <span
-                                  :data-testid="`nc-sidebar-base-${source.alias}`"
-                                  @dblclick.stop="enableEditModeForSource(source.id!)"
-                                >
+                                <span :data-testid="`nc-sidebar-base-${source.alias}`"
+                                  @dblclick.stop="enableEditModeForSource(source.id!)">
                                   {{ source.alias || '' }}
                                 </span>
                               </NcTooltip>
                             </div>
-                            <div
-                              v-if="!(source.id && sourceRenameHelpers[source.id]?.editMode)"
-                              class="flex flex-row items-center gap-x-0.25"
-                            >
-                              <NcDropdown
-                                :visible="isBasesOptionsOpen[source!.id!]"
-                                :trigger="['click']"
-                                @update:visible="isBasesOptionsOpen[source!.id!] = $event"
-                              >
-                                <NcButton
-                                  v-e="['c:source:options']"
-                                  class="nc-sidebar-node-btn"
+                            <div v-if="!(source.id && sourceRenameHelpers[source.id]?.editMode)"
+                              class="flex flex-row items-center gap-x-0.25">
+                              <NcDropdown :visible="isBasesOptionsOpen[source!.id!]" :trigger="['click']"
+                                @update:visible="isBasesOptionsOpen[source!.id!] = $event">
+                                <NcButton v-e="['c:source:options']" class="nc-sidebar-node-btn"
                                   :class="{ '!text-black !opacity-100 !inline-block': isBasesOptionsOpen[source!.id!] }"
-                                  type="text"
-                                  size="xxsmall"
-                                  @click.stop="isBasesOptionsOpen[source!.id!] = !isBasesOptionsOpen[source!.id!]"
-                                >
+                                  type="text" size="xxsmall"
+                                  @click.stop="isBasesOptionsOpen[source!.id!] = !isBasesOptionsOpen[source!.id!]">
                                   <GeneralIcon icon="threeDotHorizontal" class="text-xl w-4.75" />
                                 </NcButton>
                                 <template #overlay>
-                                  <NcMenu
-                                    class="nc-scrollbar-md !min-w-50"
-                                    :style="{
-                                      maxHeight: '70vh',
-                                      overflow: 'overlay',
-                                    }"
-                                    variant="small"
-                                    @click="isBasesOptionsOpen[source!.id!] = false"
-                                  >
-                                    <NcMenuItem
-                                      v-if="isUIAllowed('baseRename')"
-                                      data-testid="nc-sidebar-source-rename"
-                                      @click="enableEditModeForSource(source.id!)"
-                                    >
+                                  <NcMenu class="nc-scrollbar-md !min-w-50" :style="{
+                                    maxHeight: '70vh',
+                                    overflow: 'overlay',
+                                  }" variant="small" @click="isBasesOptionsOpen[source!.id!] = false">
+                                    <NcMenuItem v-if="isUIAllowed('baseRename')" data-testid="nc-sidebar-source-rename"
+                                      @click="enableEditModeForSource(source.id!)">
                                       <GeneralIcon icon="rename" />
                                       {{ $t('general.rename') }}
                                     </NcMenuItem>
@@ -497,34 +418,25 @@ const openBaseHomePage = async () => {
                                       </div>
                                     </NcMenuItem>
 
-                                    <DashboardTreeViewBaseOptions
-                                      v-if="showBaseOption(source)"
-                                      v-model:base="base"
-                                      :source="source"
-                                    />
+                                    <DashboardTreeViewBaseOptions v-if="showBaseOption(source)" v-model:base="base"
+                                      :source="source" />
                                   </NcMenu>
                                 </template>
                               </NcDropdown>
 
-                              <NcButton
-                                v-if="isUIAllowed('tableCreate', { roles: baseRole, source })"
-                                v-e="['c:source:add-table']"
-                                type="text"
-                                size="xxsmall"
-                                class="nc-sidebar-node-btn"
+                              <NcButton v-if="isUIAllowed('tableCreate', { roles: baseRole, source })"
+                                v-e="['c:source:add-table']" type="text" size="xxsmall" class="nc-sidebar-node-btn"
                                 :class="{ '!opacity-100 !inline-block': isBasesOptionsOpen[source!.id!] }"
-                                @click.stop="openTableCreateDialog(sourceIndex)"
-                              >
-                                <GeneralIcon icon="plus" class="text-xl leading-5" style="-webkit-text-stroke: 0.15px" />
+                                @click.stop="openTableCreateDialog(sourceIndex)">
+                                <GeneralIcon icon="plus" class="text-xl leading-5"
+                                  style="-webkit-text-stroke: 0.15px" />
                               </NcButton>
                             </div>
                           </div>
                         </template>
-                        <div
-                          ref="menuRefs"
+                        <div ref="menuRefs"
                           :key="`sortable-${source.id}-${source.id && source.id in keys ? keys[source.id] : '0'}`"
-                          :nc-source="source.id"
-                        >
+                          :nc-source="source.id">
                           <DashboardTreeViewTableList :base="base" :source-index="sourceIndex" />
                         </div>
                       </a-collapse-panel>

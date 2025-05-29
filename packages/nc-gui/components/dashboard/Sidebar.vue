@@ -40,8 +40,7 @@ onUnmounted(() => {
     class="nc-sidebar flex flex-col bg-gray-50 outline-r-1 outline-gray-100 select-none w-full h-full font-medium z-2"
     :style="{
       outlineWidth: '1px',
-    }"
-  >
+    }">
     <template v-if="isNewSidebarEnabled">
       <DashboardTreeViewProjectList>
         <template #footer>
@@ -53,10 +52,10 @@ onUnmounted(() => {
             <DashboardSidebarBeforeUserInfo />
 
             <LazyGeneralMaintenanceAlert />
-
+            <!-- 
             <div v-if="!isMobileMode && !appInfo.ee" class="flex flex-row w-full justify-between pt-0.5 truncate">
               <GeneralJoinCloud />
-            </div>
+            </div> -->
             <DashboardSidebarVersion v-if="appInfo.isOnPrem" />
           </div>
         </template>
@@ -68,15 +67,12 @@ onUnmounted(() => {
 
         <DashboardSidebarTopSection v-if="!isSharedBase" />
       </div>
-      <div
-        ref="treeViewDom"
-        class="flex flex-col nc-scrollbar-dark-md flex-grow xs:(border-transparent pt-2 pr-2)"
+      <div ref="treeViewDom" class="flex flex-col nc-scrollbar-dark-md flex-grow xs:(border-transparent pt-2 pr-2)"
         :class="{
           'border-t-1': !isSharedBase,
           'border-transparent': !isTreeViewOnScrollTop,
           'pt-0.25': isSharedBase,
-        }"
-      >
+        }">
         <DashboardTreeView v-if="!isWorkspaceLoading" />
       </div>
       <div v-if="!isSharedBase" class="nc-sidebar-bottom-section">
@@ -103,18 +99,20 @@ onUnmounted(() => {
   &:not(:has(.nc-upgrade-sidebar-banner)) {
     @apply border-t-1;
   }
+
   &:has(.nc-upgrade-sidebar-banner) {
     @apply -mt-2.5 pointer-events-none;
   }
 
-  & > * {
+  &>* {
     @apply my-0.5 pointer-events-auto;
   }
 
-  & > :first-child {
+  &> :first-child {
     @apply mt-0;
   }
-  & > :last-child {
+
+  &> :last-child {
     @apply mb-0;
   }
 }

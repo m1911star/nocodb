@@ -57,55 +57,6 @@ const helpItems: CategoryItemType[] = [
       },
     ],
   },
-  {
-    category: t('general.community'),
-    items: [
-      {
-        title: t('title.forum'),
-        icon: 'ncDiscordForum',
-        e: 'c:nocodb:forum-open',
-        link: 'https://community.nocodb.com/',
-      },
-      {
-        title: t('general.youtube'),
-        icon: 'ncYoutube',
-        e: 'c:nocodb:youtube-open',
-        link: 'https://www.youtube.com/@nocodb',
-      },
-      {
-        title: 'X',
-        icon: 'ncLogoTwitter',
-        link: 'https://twitter.com/nocodb',
-        e: 'c:nocodb:twitter',
-      },
-    ],
-  },
-  {
-    category: t('general.contactSupport'),
-    items: [
-      {
-        title: 'support@nocodb.com',
-        icon: 'ncMail',
-        e: 'c:nocodb:contact-us-mail-copy',
-        link: '',
-        copyBtn: true,
-        tooltip: t('labels.clickToCopy'),
-      },
-    ],
-    hidden: !isEeUI,
-  },
-  {
-    category: t('title.whatsNew'),
-    items: [
-      {
-        title: t('general.changelog'),
-        icon: 'ncList',
-        e: 'c:nocodb:changelog-open',
-        link: '',
-        onClick: () => navigateToFeed(undefined, undefined, { tab: 'github' }),
-      },
-    ],
-  },
 ]
 
 const openUrl = (item: ItemType) => {
@@ -134,12 +85,9 @@ const openUrl = (item: ItemType) => {
   <div class="nc-mini-sidebar-btn-full-width">
     <NcDropdown v-model:visible="visible" placement="right" overlay-class-name="!min-w-55">
       <div class="w-full py-1 flex items-center justify-center">
-        <div
-          class="nc-mini-sidebar-btn"
-          :class="{
-            hovered: visible,
-          }"
-        >
+        <div class="nc-mini-sidebar-btn" :class="{
+          hovered: visible,
+        }">
           <GeneralIcon icon="ncHelp" />
         </div>
       </div>
@@ -173,13 +121,8 @@ const openUrl = (item: ItemType) => {
                     <GeneralIcon v-if="item.icon" :icon="item.icon" class="h-4 w-4" />
                     {{ item.title }}
 
-                    <GeneralCopyButton
-                      v-if="item.copyBtn"
-                      ref="copyBtnRef"
-                      type="secondary"
-                      :content="item.title"
-                      :show-toast="false"
-                    />
+                    <GeneralCopyButton v-if="item.copyBtn" ref="copyBtnRef" type="secondary" :content="item.title"
+                      :show-toast="false" />
                   </NcMenuItem>
                 </NcTooltip>
               </template>

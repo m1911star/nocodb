@@ -94,12 +94,9 @@ useEventListener(document, 'keydown', async (e: KeyboardEvent) => {
   <div class="nc-mini-sidebar" data-testid="nc-mini-sidebar">
     <div class="flex flex-col items-center">
       <DashboardMiniSidebarItemWrapper size="small">
-        <div
-          class="min-h-9 sticky top-0 bg-[var(--mini-sidebar-bg-color)]"
-          :class="{
-            'pt-1.5 pb-2.5': isMobileMode,
-          }"
-        >
+        <div class="min-h-9 sticky top-0 bg-[var(--mini-sidebar-bg-color)]" :class="{
+          'pt-1.5 pb-2.5': isMobileMode,
+        }">
           <GeneralLoader v-if="isWorkspacesLoading" size="large" />
           <WorkspaceMenu v-else />
         </div>
@@ -113,14 +110,12 @@ useEventListener(document, 'keydown', async (e: KeyboardEvent) => {
               <div class="px-1 text-bodySmBold text-white bg-gray-700 rounded">{{ renderAltOrOptlKey(true) }} B</div>
             </div>
           </template>
-          <div class="nc-mini-sidebar-btn-full-width" data-testid="nc-sidebar-project-btn" @click="navigateToProjectPage">
-            <div
-              class="nc-mini-sidebar-btn"
-              :class="{
-                'active': isProjectPageOpen,
-                'active-base': isProjectListOrHomePageOpen,
-              }"
-            >
+          <div class="nc-mini-sidebar-btn-full-width" data-testid="nc-sidebar-project-btn"
+            @click="navigateToProjectPage">
+            <div class="nc-mini-sidebar-btn" :class="{
+              'active': isProjectPageOpen,
+              'active-base': isProjectListOrHomePageOpen,
+            }">
               <GeneralIcon icon="ncBaseOutline" class="h-4 w-4" />
             </div>
           </div>
@@ -133,12 +128,8 @@ useEventListener(document, 'keydown', async (e: KeyboardEvent) => {
             <template #title>
               <div class="flex items-center gap-1">{{ renderCmdOrCtrlKey(true) }} K</div>
             </template>
-            <div
-              v-e="['c:quick-actions']"
-              class="nc-mini-sidebar-btn-full-width"
-              data-testid="nc-sidebar-cmd-k-btn"
-              @click="commandPalette?.open()"
-            >
+            <div v-e="['c:quick-actions']" class="nc-mini-sidebar-btn-full-width" data-testid="nc-sidebar-cmd-k-btn"
+              @click="commandPalette?.open()">
               <div class="nc-mini-sidebar-btn">
                 <GeneralIcon icon="search" class="h-4 w-4" />
               </div>
@@ -148,20 +139,14 @@ useEventListener(document, 'keydown', async (e: KeyboardEvent) => {
         <div v-if="isUIAllowed('workspaceSettings')" class="px-2 w-full">
           <NcDivider class="!my-0 !border-nc-border-gray-dark" />
         </div>
-        <DashboardMiniSidebarItemWrapper v-if="isUIAllowed('workspaceSettings') || isUIAllowed('workspaceCollaborators')">
+        <DashboardMiniSidebarItemWrapper
+          v-if="isUIAllowed('workspaceSettings') || isUIAllowed('workspaceCollaborators')">
           <NcTooltip :title="$t('title.teamAndSettings')" placement="right" hide-on-click :arrow="false">
-            <div
-              v-e="['c:team:settings']"
-              class="nc-mini-sidebar-btn-full-width"
-              data-testid="nc-sidebar-team-settings-btn"
-              @click="navigateToSettings"
-            >
-              <div
-                class="nc-mini-sidebar-btn"
-                :class="{
-                  active: isWorkspaceSettingsPageOpened,
-                }"
-              >
+            <div v-e="['c:team:settings']" class="nc-mini-sidebar-btn-full-width"
+              data-testid="nc-sidebar-team-settings-btn" @click="navigateToSettings">
+              <div class="nc-mini-sidebar-btn" :class="{
+                active: isWorkspaceSettingsPageOpened,
+              }">
                 <GeneralIcon icon="ncSettings" class="h-4 w-4" />
               </div>
             </div>
@@ -169,18 +154,11 @@ useEventListener(document, 'keydown', async (e: KeyboardEvent) => {
         </DashboardMiniSidebarItemWrapper>
         <DashboardMiniSidebarItemWrapper v-if="isUIAllowed('workspaceSettings')">
           <NcTooltip :title="$t('general.integrations')" placement="right" hide-on-click :arrow="false">
-            <div
-              v-e="['c:integrations']"
-              class="nc-mini-sidebar-btn-full-width"
-              data-testid="nc-sidebar-integrations-btn"
-              @click="navigateToIntegrations"
-            >
-              <div
-                class="nc-mini-sidebar-btn"
-                :class="{
-                  active: isIntegrationsPageOpened,
-                }"
-              >
+            <div v-e="['c:integrations']" class="nc-mini-sidebar-btn-full-width"
+              data-testid="nc-sidebar-integrations-btn" @click="navigateToIntegrations">
+              <div class="nc-mini-sidebar-btn" :class="{
+                active: isIntegrationsPageOpened,
+              }">
                 <GeneralIcon icon="integration" class="h-4 w-4" />
               </div>
             </div>
@@ -190,11 +168,11 @@ useEventListener(document, 'keydown', async (e: KeyboardEvent) => {
         <div class="px-2 w-full">
           <NcDivider class="!my-0 !border-nc-border-gray-dark" />
         </div>
-        <DashboardMiniSidebarItemWrapper>
+        <!-- <DashboardMiniSidebarItemWrapper>
           <NcTooltip :title="$t('general.notification')" placement="right" hide-on-click :arrow="false">
             <NotificationMenu />
           </NcTooltip>
-        </DashboardMiniSidebarItemWrapper>
+        </DashboardMiniSidebarItemWrapper> -->
       </template>
     </div>
     <div class="flex flex-col items-center">
@@ -203,11 +181,12 @@ useEventListener(document, 'keydown', async (e: KeyboardEvent) => {
           <DashboardMiniSidebarHelp />
         </NcTooltip>
       </DashboardMiniSidebarItemWrapper>
-      <DashboardMiniSidebarItemWrapper>
-        <NcTooltip v-if="appInfo.feedEnabled" :title="`${$t('title.whatsNew')}!`" placement="right" hide-on-click :arrow="false">
+      <!-- <DashboardMiniSidebarItemWrapper>
+        <NcTooltip v-if="appInfo.feedEnabled" :title="`${$t('title.whatsNew')}!`" placement="right" hide-on-click
+          :arrow="false">
           <DashboardSidebarFeed />
         </NcTooltip>
-      </DashboardMiniSidebarItemWrapper>
+      </DashboardMiniSidebarItemWrapper> -->
 
       <div class="px-2 w-full">
         <NcDivider class="!my-0 !border-nc-border-gray-dark" />
@@ -241,6 +220,7 @@ useEventListener(document, 'keydown', async (e: KeyboardEvent) => {
     &.nc-small-shadow .nc-workspace-avatar {
       box-shadow: 0px 5px 0px -2px rgba(0, 0, 0, 0.4);
     }
+
     &.nc-medium-shadow .nc-workspace-avatar {
       box-shadow: 0px 4px 0px -2px rgba(0, 0, 0, 0.4), 0px 7px 0px -3px rgba(0, 0, 0, 0.2);
     }
